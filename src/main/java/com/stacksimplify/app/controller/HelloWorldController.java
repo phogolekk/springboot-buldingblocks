@@ -21,5 +21,14 @@ public class HelloWorldController {
 		return "Hello world 1";
 	
 	}
+	
+	
+	@GetMapping("/beandata")
+	public UserDetails hellowordbean() {
+		
+		return new UserDetails("kamogelo", "phogole", "Jhb");
+		
+		
+	}
 
 }

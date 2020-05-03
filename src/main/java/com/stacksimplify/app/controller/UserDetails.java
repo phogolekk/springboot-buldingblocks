@@ -1,0 +1,44 @@
+package com.stacksimplify.app.controller;
+
+public class UserDetails {
+	
+	String firstname;
+	String lastname;
+	String city;
+	
+	
+	
+	public UserDetails(String firstname, String lastname, String city) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.city = city;
+	}
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
+	//To string
+	@Override
+	public String toString() {
+		return "UserDetails [firstname=" + firstname + ", lastname=" + lastname + ", city=" + city + "]";
+	}
+	
+	
+
+}
