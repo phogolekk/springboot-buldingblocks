@@ -1,10 +1,16 @@
 package com.stacksimplify.app.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 //Entity
 
@@ -16,9 +22,12 @@ public class User {
 	@GeneratedValue
 	private long id;
 	
+	@NotEmpty(message = "Username is mandatory. please provide username")
+	
 	@Column(name ="USER_NAME", length=50, nullable=false, unique=true)                               
 	private String username;
 	
+	@Size(min =2, message = "First name should atleast be 2 characters")
 	@Column(name ="FIRST_NAME", length = 50, nullable = false)
 	private String firstname;
 	
@@ -33,9 +42,20 @@ public class User {
 	
 	@Column(name ="SSN", length=50, nullable = false, unique = true)
 	private String ssn;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Order> orders;
 
 	
 	
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 	//No agument constructor
 	public User() {
 		
