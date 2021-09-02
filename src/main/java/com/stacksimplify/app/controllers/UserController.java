@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
+import com.stacksimplify.app.exceptions.UserNameNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +33,7 @@ import com.stacksimplify.app.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
+@Validated
 public class UserController {
 
 	// Autowire the userservice
@@ -67,7 +71,7 @@ public class UserController {
 	// create getuserby id
 
 	@GetMapping("/{id}")
-	public Optional<User> getUserById(@PathVariable("id") Long id) {
+	public Optional<User> getUserById(@Min (1) @PathVariable("id") Long id) {
 
 		try {
 			return userService.getUserById(id);
@@ -102,9 +106,12 @@ public class UserController {
 	// get user by username
 
 	@GetMapping("/byUsername/{username}")
-	public User getUserbyUsername(@PathVariable String username) {
+	public User getUserbyUsername(@PathVariable String username) throws UserNameNotFoundException {
 
-		return userService.getUserByUsername(username);
+		User user= userService.getUserByUsername(username);
+		if(user==null)
+			throw new  UserNameNotFoundException("Username: " +username +" not found in user repository");
+		return user;
 
 	}
 

@@ -10,7 +10,7 @@ public class CustomErrorDetails {
 	private String erromedetails;
 	
 	
-	public CustomErrorDetails(Date date1, String message, String erromedetails) {
+	public CustomErrorDetails( Date date1, String message, String erromedetails) {
 		super();
 		this.date1 = date1;
 		this.message = message;
